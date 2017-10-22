@@ -1,6 +1,6 @@
 // http://pac.itzmx.com
 
-var proxy = "PROXY 你的vps服务器ip:45.32.139.149;";
+var proxy = "PROXY 45.32.139.149:25;";
 
 var domains = {
   "slideshare.net": 1,
