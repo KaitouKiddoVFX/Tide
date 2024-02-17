@@ -16,3 +16,4 @@ namespace Tide
 		s_ClientLogger->set_level(spdlog::level::trace);
 	}
 }
+
