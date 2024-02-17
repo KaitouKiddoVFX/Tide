@@ -11,12 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Tide\Log.h" />
     <ClInclude Include="src\Tide.h" />
     <ClInclude Include="src\Tide\Core.h" />
     <ClInclude Include="src\Tide\EntryPt.h" />
     <ClInclude Include="src\Tide\TideApp.h" />
+    <ClInclude Include="vendor\spdlog\include\spdlog\logger.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Tide\Log.cpp" />
     <ClCompile Include="src\Tide\TideApp.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -66,6 +69,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>TD_PLATFORM_WINDOWS;TD_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Tide\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -80,6 +84,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Tide\vendor\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

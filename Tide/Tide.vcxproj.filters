@@ -33,9 +33,18 @@
     <ClInclude Include="src\Tide\EntryPt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Tide\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\spdlog\include\spdlog\logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Tide\TideApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tide\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
