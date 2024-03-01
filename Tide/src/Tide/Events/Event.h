@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Tide/Core.h"
-#include <string>
-#include <functional>
 
 namespace Tide
 {
@@ -52,7 +50,7 @@ namespace Tide
 	class EventDispatcher
 	{
 		template<typename T>
-		using EventFn = std::function<box(T&)>;
+		using EventFn = std::function<bool(T&)>;
 	public:
 		EventDispatcher(Event& event)
 			: m_Event(event) {}

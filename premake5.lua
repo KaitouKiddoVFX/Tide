@@ -10,6 +10,13 @@ workspace "TideEnginee"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Tide/vendor/GLFW/include"
+--IncludeDir["GLFW_SRC"] = "Tide/vendor/GLFW/src"
+
+include "Tide/vendor/GLFW"
+
 project "Tide"
     location "Tide"
     kind "SharedLib"
@@ -17,6 +24,9 @@ project "Tide"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    pchheader "tdpch.h"
+    pchsource "Tide/src/tdpch.cpp"
 
     files
     {
@@ -27,7 +37,15 @@ project "Tide"
     includedirs
     {
         "%{prj.name}/src",
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include",
+        "%{IncludeDir.GLFW}",
+        --"%{IncludeDir.GLFW_SRC}"
+    }
+
+    links
+    {
+        "GLFW",
+        "opengl32.lib"
     }
 
     filter "system:windows"
@@ -43,7 +61,7 @@ project "Tide"
 
         postbuildcommands
         {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/TideSandbox")
+            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/TideSandBox")
         }
 
     filter "configurations:Debug"
