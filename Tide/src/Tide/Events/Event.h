@@ -1,5 +1,6 @@
 #pragma once
 
+#include "tdpch.h"
 #include "Tide/Core.h"
 
 namespace Tide
