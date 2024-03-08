@@ -53,6 +53,6 @@ namespace Tide
 			return ss.str();
 		}
 
-		EVENT_CLASS_TYPE(keyReleased)
+		EVENT_CLASS_TYPE(KeyReleased)
 	};
 }

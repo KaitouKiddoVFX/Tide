@@ -25,6 +25,15 @@ namespace Tide
 		unsigned int m_Width, m_Height;
 	};
 
+	class TIDE_API WindowCloseEvent : public Event
+	{
+	public:
+		WindowCloseEvent() {}
+
+		EVENT_CLASS_TYPE(WindowClose)
+		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+	};
+
 	class TIDE_API AppTickEvent : public Event
 	{
 	public:
@@ -39,6 +48,15 @@ namespace Tide
 		AppUpdateEvent() {}
 
 		EVENT_CLASS_TYPE(AppUpdate)
+		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+	};
+
+	class TIDE_API AppRenderEvent : public Event
+	{
+	public:
+		AppRenderEvent() {}
+
+		EVENT_CLASS_TYPE(AppRender)
 		EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 }
