@@ -21,6 +21,7 @@ project "Tide"
     location "Tide"
     kind "SharedLib"
     language "C++"
+    staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -67,14 +68,17 @@ project "Tide"
     filter "configurations:Debug"
         defines "TD_DEBUG"
         symbols "On"
+        buildoptions "/MDd"
 
     filter "configurations:Release"
         defines "TD_RELEASE"
         symbols "On"
+        buildoptions "/MD"
 
     filter "configurations:Dist"
         defines "TD_DIST"
         symbols "On"
+        buildoptions "/MD"
 
 project "TideSandBox"
     location "TideSandBox"
@@ -114,11 +118,14 @@ project "TideSandBox"
     filter "configurations:Debug"
         defines "TD_DEBUG"
         symbols "On"
+        buildoptions "/MDd"
 
     filter "configurations:Release"
         defines "TD_RELEASE"
         symbols "On"
+        buildoptions "/MD"
 
     filter "configurations:Dist"
         defines "TD_DIST"
-        symbols "On"        
+        symbols "On"
+        buildoptions "/MD"        
