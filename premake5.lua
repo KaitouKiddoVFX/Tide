@@ -13,15 +13,17 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Tide/vendor/GLFW/include"
---IncludeDir["GLFW_SRC"] = "Tide/vendor/GLFW/src"
+IncludeDir["Glad"] = "Tide/vendor/Glad/include"
+IncludeDir["ImGui"] = "Tide/vendor/imgui"
 
 include "Tide/vendor/GLFW"
+include "Tide/vendor/Glad"
+include "Tide/vendor/imgui"
 
 project "Tide"
     location "Tide"
     kind "SharedLib"
     language "C++"
-    staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -40,12 +42,15 @@ project "Tide"
         "%{prj.name}/src",
         "%{prj.name}/vendor/spdlog/include",
         "%{IncludeDir.GLFW}",
-        --"%{IncludeDir.GLFW_SRC}"
+        "%{IncludeDir.Glad}",
+        "%{IncludeDir.ImGui}"
     }
 
     links
     {
         "GLFW",
+        "Glad",
+        "ImGui",
         "opengl32.lib"
     }
 
@@ -57,7 +62,8 @@ project "Tide"
         defines
         {
             "TD_PLATFORM_WINDOWS",
-            "TD_BUILD_DLL"
+            "TD_BUILD_DLL",
+            "GLFW_INCLUDE_NONE"
         }
 
         postbuildcommands
@@ -72,12 +78,12 @@ project "Tide"
 
     filter "configurations:Release"
         defines "TD_RELEASE"
-        symbols "On"
+        optimize "On"
         buildoptions "/MD"
 
     filter "configurations:Dist"
         defines "TD_DIST"
-        symbols "On"
+        optimize "On"
         buildoptions "/MD"
 
 project "TideSandBox"
@@ -122,10 +128,10 @@ project "TideSandBox"
 
     filter "configurations:Release"
         defines "TD_RELEASE"
-        symbols "On"
+        optimize "On"
         buildoptions "/MD"
 
     filter "configurations:Dist"
         defines "TD_DIST"
-        symbols "On"
+        optimize "On"
         buildoptions "/MD"        

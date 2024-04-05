@@ -1,6 +1,9 @@
 [submodule "Tide/vendor/spdlog"]
 	path = Tide/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "Tide/vendor/imgui"]
+	path = Tide/vendor/imgui
+	url = https://github.com/TheCherno/imgui
 [submodule "Tide/vendor/GLFW"]
 	path = Tide/vendor/GLFW
 	url = https://github.com/TheCherno/glfw
