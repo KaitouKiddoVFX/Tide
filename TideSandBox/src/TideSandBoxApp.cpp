@@ -1,5 +1,5 @@
 #include <Tide.h>
-/*
+
 class ExampleLayer : public Tide::Layer
 {
 public:
@@ -17,8 +17,6 @@ public:
 		TD_TRACE("{0}", event);
 	}
 };
-*/
-
 
 
 class TideSandBox : public Tide::TideApp
@@ -26,7 +24,8 @@ class TideSandBox : public Tide::TideApp
 public:
 	TideSandBox() 
 	{
-		//PushLayer(new ExampleLayer());
+		PushLayer(new ExampleLayer());
+		PushOverlay(new Tide::ImGuiLayer());
 	};
 	~TideSandBox() {};
 };
