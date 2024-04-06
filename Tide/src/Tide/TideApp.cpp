@@ -1,6 +1,7 @@
 #include "tdpch.h"
 #include "TideApp.h"
 #include "Tide/Log.h"
+#include "Input.h"
 #include <glad/glad.h>
 
 namespace Tide
