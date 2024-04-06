@@ -10,6 +10,10 @@
 	#error TD Only support windows!
 #endif
 
+#ifdef TD_DEBUG
+	#define TD_ENABLE_ASSERTS
+#endif
+
 #ifdef TD_ENABLE_ASSERTS
 	#define TD_ASSERT(x, ...) { if(!(x)) {TD_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 	#define TD_CORE_ASSERT(x, ...) { if(!(x)) { TD_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
