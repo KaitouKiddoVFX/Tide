@@ -16,6 +16,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Tide/vendor/GLFW/include"
 IncludeDir["Glad"] = "Tide/vendor/Glad/include"
 IncludeDir["ImGui"] = "Tide/vendor/imgui"
+IncludeDir["glm"] = "Tide/vendor/glm"
 
 include "Tide/vendor/GLFW"
 include "Tide/vendor/Glad"
@@ -35,7 +36,9 @@ project "Tide"
     files
     {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/glm/glm/**.hpp",
+        "%{prj.name}/vendor/glm/glm/**.inl",
     }
 
     includedirs
@@ -44,7 +47,8 @@ project "Tide"
         "%{prj.name}/vendor/spdlog/include",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
-        "%{IncludeDir.ImGui}"
+        "%{IncludeDir.ImGui}",
+        "%{IncludeDir.glm}"
     }
 
     links
@@ -104,7 +108,8 @@ project "TideSandBox"
     includedirs
     {
         "Tide/vendor/spdlog/include",
-        "Tide/src"
+        "Tide/src",
+        "%{IncludeDir.glm}"
     }
 
     links
