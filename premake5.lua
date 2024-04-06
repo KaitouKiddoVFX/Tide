@@ -1,5 +1,6 @@
 workspace "TideEnginee"
     architecture "x64"
+    startproject "TideSandBox"
 
     configurations
     {
@@ -56,7 +57,6 @@ project "Tide"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 
         defines
@@ -73,23 +73,24 @@ project "Tide"
 
     filter "configurations:Debug"
         defines "TD_DEBUG"
+        runtime "Debug"
         symbols "On"
-        buildoptions "/MDd"
 
     filter "configurations:Release"
         defines "TD_RELEASE"
+        runtime "Release"
         optimize "On"
-        buildoptions "/MD"
 
     filter "configurations:Dist"
         defines "TD_DIST"
+        runtime "Release"
         optimize "On"
-        buildoptions "/MD"
 
 project "TideSandBox"
     location "TideSandBox"
     kind "ConsoleApp"
     language "C++"
+    staticruntime "Off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -113,7 +114,6 @@ project "TideSandBox"
 
     filter "system:windows"
         cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
 
         defines
@@ -123,15 +123,15 @@ project "TideSandBox"
 
     filter "configurations:Debug"
         defines "TD_DEBUG"
+        runtime "Debug"
         symbols "On"
-        buildoptions "/MDd"
 
     filter "configurations:Release"
         defines "TD_RELEASE"
+        runtime "Release"
         optimize "On"
-        buildoptions "/MD"
 
     filter "configurations:Dist"
         defines "TD_DIST"
+        runtime "Release"        
         optimize "On"
-        buildoptions "/MD"        
