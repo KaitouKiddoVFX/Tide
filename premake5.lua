@@ -109,6 +109,7 @@ project "TideSandBox"
     {
         "Tide/vendor/spdlog/include",
         "Tide/src",
+        "Tide/vendor",
         "%{IncludeDir.glm}"
     }
 

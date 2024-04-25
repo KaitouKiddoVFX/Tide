@@ -4,6 +4,7 @@
 #include "Tide/LayerStack.h"
 #include "Tide/Events/Event.h"
 #include "Tide/Events/AppEvent.h"
+#include "Tide/ImGui/ImGuiLayer.h"
 
 namespace Tide
 {
@@ -22,8 +23,8 @@ namespace Tide
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
-
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
