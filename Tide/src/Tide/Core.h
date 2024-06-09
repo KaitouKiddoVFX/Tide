@@ -1,10 +1,14 @@
 #pragma once
 
 #ifdef TD_PLATFORM_WINDOWS
-	#ifdef TD_BUILD_DLL
-		#define TIDE_API __declspec(dllexport)
-	#else TD_BUILD_DLL
-		#define TIDE_API __declspec(dllimport)
+	#if TD_DYNAMIC_LINK
+		#ifdef TD_BUILD_DLL
+			#define TIDE_API __declspec(dllexport)
+		#else TD_BUILD_DLL
+			#define TIDE_API __declspec(dllimport)
+		#endif
+	#else
+		#define TIDE_API
 	#endif
 #else
 	#error TD Only support windows!

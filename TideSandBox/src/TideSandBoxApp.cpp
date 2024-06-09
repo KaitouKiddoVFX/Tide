@@ -32,6 +32,13 @@ public:
 		}
 	}
 
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World!");
+		ImGui::End();
+	}
+
 	void OnEvent(Tide::Event& event) override
 	{
 		if (event.GetEventType() == Tide::EventType::KeyPressed)
@@ -42,14 +49,6 @@ public:
 			TD_TRACE("{0}", (char)e.GetKeyCode());
 		}
 	}
-
-	virtual void OnImGuiRender() override
-	{
-		// ImGui::Begin("Test");
-		// ImGui::Text("Hello World!");
-		// ImGui::End();
-	}
-
 };
 
 class TideSandBox : public Tide::TideApp
