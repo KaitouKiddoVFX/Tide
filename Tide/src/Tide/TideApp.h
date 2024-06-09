@@ -28,6 +28,9 @@ namespace Tide
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
+		// Temporary
+		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+
 	private:
 		static TideApp* s_Instance;
 	};
