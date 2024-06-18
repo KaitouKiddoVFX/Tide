@@ -20,12 +20,11 @@ project "Glad"
 
     filter "system:windows"
         systemversion "latest"
-        staticruntime "On"
 
     filter "configurations:Debug"
         runtime "Debug"
-        symbols "On"
+        symbols "on"
 
     filter "configurations:Release"
         runtime "Release"
-        symbols "On"        
+        optimize "on"
