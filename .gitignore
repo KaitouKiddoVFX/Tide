@@ -9,3 +9,8 @@ bin-int/
 **.vcxproj.filters
 **.vcxproj.user
 **.csproj
+
+# submodule
+Tide/vendor/**
+
+TideSandBox/imgui.ini

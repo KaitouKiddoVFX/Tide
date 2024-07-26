@@ -8,6 +8,7 @@
 #include "Tide/Renderer/Shader.h"
 #include "Tide/Renderer/Buffer.h"
 #include "Tide/Renderer/VertexArray.h"
+#include "Tide/Renderer/OrthographicCamera.h"
 
 namespace Tide
 {
@@ -15,7 +16,7 @@ namespace Tide
 	{
 	public:
 		TideApp();
-		virtual ~TideApp();
+		virtual ~TideApp() = default;
 		void Run();
 		void OnEvent(Event& e);
 		void PushLayer(Layer* layer);
@@ -36,6 +37,8 @@ namespace Tide
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 
 	private:
 		static TideApp* s_Instance;

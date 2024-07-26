@@ -18,9 +18,12 @@ IncludeDir["Glad"] = "Tide/vendor/Glad/include"
 IncludeDir["ImGui"] = "Tide/vendor/imgui"
 IncludeDir["glm"] = "Tide/vendor/glm"
 
-include "Tide/vendor/GLFW"
-include "Tide/vendor/Glad"
-include "Tide/vendor/imgui"
+group "Dependencies"
+    include "Tide/vendor/GLFW"
+    include "Tide/vendor/Glad"
+    include "Tide/vendor/imgui"
+
+group ""
 
 project "Tide"
     location "Tide"
@@ -67,7 +70,7 @@ project "Tide"
     }
 
     filter "system:windows"
-        cppdialect "C++17"
+        -- cppdialect "C++17"
         systemversion "latest"
 
         defines
@@ -77,10 +80,10 @@ project "Tide"
             "GLFW_INCLUDE_NONE"
         }
 
-        postbuildcommands
-        {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/TideSandBox")
-        }
+        -- postbuildcommands
+        -- {
+        --    ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/TideSandBox")
+        -- }
 
     filter "configurations:Debug"
         defines "TD_DEBUG"
@@ -146,5 +149,5 @@ project "TideSandBox"
 
     filter "configurations:Dist"
         defines "TD_DIST"
-        runtime "Release"        
+        runtime "Release"
         optimize "On"

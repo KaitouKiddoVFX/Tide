@@ -17,18 +17,12 @@ namespace Tide {
 	{
 	}
 
-	ImGuiLayer::~ImGuiLayer()
-	{
-	}
-
 	void ImGuiLayer::OnAttach()
 	{
 		// Setup Dear ImGui Context
 		IMGUI_CHECKVERSION();		
 		ImGui::CreateContext();
-		ImGui::StyleColorsDark();
-		ImGuiIO& io = ImGui::GetIO();
-		(void)io;
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;	// Enable Keyboard Controls
 		// io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;	// Enable Keyboard Controls
 		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;		// Enable Docking
@@ -38,6 +32,7 @@ namespace Tide {
 
 		// Setup Dear ImGui Style
 		ImGui::StyleColorsDark();
+		// ImGui::StyleColorsClassic();
 
 		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
 		ImGuiStyle& style = ImGui::GetStyle();
