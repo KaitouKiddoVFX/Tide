@@ -4,9 +4,9 @@
 [submodule "Tide/vendor/glm"]
 	path = Tide/vendor/glm
 	url = https://github.com/g-truc/glm
-[submodule "Tide/vendor/imgui"]
-	path = Tide/vendor/imgui
-	url = https://github.com/ocornut/imgui
 [submodule "Tide/vendor/GLFW"]
 	path = Tide/vendor/GLFW
 	url = https://github.com/glfw/glfw
+[submodule "Tide/vendor/imgui"]
+	path = Tide/vendor/imgui
+	url = https://github.com/ocornut/imgui

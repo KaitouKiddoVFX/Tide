@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Tide/Core.h"
+#include "Tide/Core/Timestep.h"
 #include "Tide/Events/Event.h"
 
 namespace Tide
@@ -13,11 +14,12 @@ namespace Tide
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 
 		inline const std::string& GetName() const { return m_DebugName; }
+
 	protected:
 		std::string m_DebugName;
 	};

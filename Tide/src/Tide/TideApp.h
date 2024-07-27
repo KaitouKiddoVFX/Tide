@@ -4,11 +4,8 @@
 #include "Tide/LayerStack.h"
 #include "Tide/Events/Event.h"
 #include "Tide/Events/AppEvent.h"
+#include "Tide/Core/Timestep.h"
 #include "Tide/ImGui/ImGuiLayer.h"
-#include "Tide/Renderer/Shader.h"
-#include "Tide/Renderer/Buffer.h"
-#include "Tide/Renderer/VertexArray.h"
-#include "Tide/Renderer/OrthographicCamera.h"
 
 namespace Tide
 {
@@ -27,19 +24,13 @@ namespace Tide
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
+
+	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
-
-		OrthographicCamera m_Camera;
-
+		float m_LastFrameTime = 0.0f;
 	private:
 		static TideApp* s_Instance;
 	};
