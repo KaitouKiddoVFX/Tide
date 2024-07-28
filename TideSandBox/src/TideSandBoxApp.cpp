@@ -112,9 +112,11 @@ public:
 
 			in vec3 v_Position;
 
+			uniform vec4 u_Color;
+
 			void main()
 			{
-				color = vec4(0.2, 0.3, 0.8, 1.0);
+				color = u_Color;
 			}
 		)";
 
@@ -168,16 +170,28 @@ public:
 
 		Tide::Renderer::BeginScene(m_Camera);
 
+		// --- Square Color ---
+		glm::vec4 redColor(0.8f, 0.2f, 0.3f, 1.0f);
+		glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
+
 		// --- Square ---
 		glm::mat4 sqtransform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
 		Tide::Renderer::Submit(m_BlueShader, m_SquareVA, sqtransform);
 
 		// --- Array of Square ---
-		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 		for (int i=0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
 			{
+				if ( j%2 == 0)
+				{
+					m_BlueShader->UploadUniformFloat4("u_Color", redColor);
+				}
+				else
+				{
+					m_BlueShader->UploadUniformFloat4("u_Color", blueColor);
+				}
 				glm::vec3 pos(i * 0.11f, j * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
 				Tide::Renderer::Submit(m_BlueShader, m_SquareVA, transform);
