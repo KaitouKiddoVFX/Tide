@@ -3,8 +3,8 @@
 
 namespace Tide
 {
-	std::shared_ptr<spdlog::logger> Log::s_CoreLogger;
-	std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
+	Tide::Ref<spdlog::logger> Log::s_CoreLogger;
+	Tide::Ref<spdlog::logger> Log::s_ClientLogger;
 
 	void Log::Init()
 	{

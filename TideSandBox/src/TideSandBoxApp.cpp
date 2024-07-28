@@ -18,7 +18,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
-		std::shared_ptr<Tide::VertexBuffer> vertexBuffer;
+		Tide::Ref<Tide::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Tide::VertexBuffer::Create(vertices, sizeof(vertices)));
 		Tide::BufferLayout layout = {
 			{ Tide::ShaderDataType::Float3, "a_Position" },
@@ -28,7 +28,7 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Tide::IndexBuffer> indexBuffer;
+		Tide::Ref<Tide::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Tide::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -41,7 +41,7 @@ public:
 			-0.5f,  0.5f, 0.0f
 		};
 
-		std::shared_ptr<Tide::VertexBuffer> squareVB;
+		Tide::Ref<Tide::VertexBuffer> squareVB;
 		squareVB.reset(Tide::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
 			{ Tide::ShaderDataType::Float3, "a_Position" }
@@ -49,7 +49,7 @@ public:
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<Tide::IndexBuffer> squareIB;
+		Tide::Ref<Tide::IndexBuffer> squareIB;
 		squareIB.reset(Tide::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -205,11 +205,11 @@ public:
 	}
 
 private:
-	std::shared_ptr<Tide::Shader> m_Shader;
-	std::shared_ptr<Tide::VertexArray> m_VertexArray;
+	Tide::Ref<Tide::Shader> m_Shader;
+	Tide::Ref<Tide::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Tide::Shader> m_FlatColorShader;
-	std::shared_ptr<Tide::VertexArray> m_SquareVA;
+	Tide::Ref<Tide::Shader> m_FlatColorShader;
+	Tide::Ref<Tide::VertexArray> m_SquareVA;
 
 	Tide::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
