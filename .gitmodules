@@ -10,3 +10,6 @@
 [submodule "Tide/vendor/imgui"]
 	path = Tide/vendor/imgui
 	url = https://github.com/ocornut/imgui
+[submodule "Tide/vendor/std_image"]
+	path = Tide/vendor/std_image
+	url = https://github.com/nothings/stb.git

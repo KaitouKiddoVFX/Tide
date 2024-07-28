@@ -15,8 +15,9 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Tide/vendor/GLFW/include"
 IncludeDir["Glad"] = "Tide/vendor/Glad/include"
-IncludeDir["ImGui"] = "Tide/vendor/imgui"
+IncludeDir["imgui"] = "Tide/vendor/imgui"
 IncludeDir["glm"] = "Tide/vendor/glm"
+IncludeDir["std_image"] = "Tide/vendor/std_image"
 
 group "Dependencies"
     include "Tide/vendor/GLFW"
@@ -42,8 +43,10 @@ project "Tide"
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/std_image/**.h",
+        "%{prj.name}/vendor/std_image/**.cpp",        
         "%{prj.name}/vendor/glm/glm/**.hpp",
-        "%{prj.name}/vendor/glm/glm/**.inl",
+        "%{prj.name}/vendor/glm/glm/**.inl"
     }
 
     defines
@@ -57,15 +60,16 @@ project "Tide"
         "%{prj.name}/vendor/spdlog/include",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
-        "%{IncludeDir.ImGui}",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.imgui}",
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.std_image}"
     }
 
     links
     {
         "GLFW",
         "Glad",
-        "ImGui",
+        "imgui",
         "opengl32.lib"
     }
 

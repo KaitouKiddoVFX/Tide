@@ -11,7 +11,7 @@ bin-int/
 **.csproj
 
 # submodule
-Tide/vendor/**
+Tide/vendor/
 
 TideSandBox/imgui.ini
 
