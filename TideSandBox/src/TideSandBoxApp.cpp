@@ -1,5 +1,6 @@
 #include <Tide.h>
 #include "imgui/imgui.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 class ExampleLayer : public Tide::Layer
 {
@@ -32,10 +33,10 @@ public:
 		m_SquareVA.reset(Tide::VertexArray::Create());
 
 		float squareVertices[3 * 4] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f
 		};
 
 		std::shared_ptr<Tide::VertexBuffer> squareVB;
@@ -57,6 +58,7 @@ public:
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -65,7 +67,7 @@ public:
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -92,13 +94,14 @@ public:
 			layout(location = 0) in vec3 a_Position;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);	
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -120,6 +123,7 @@ public:
 
 	void OnUpdate(Tide::Timestep ts) override
 	{
+		// --- Polling ---		
 		if (Tide::Input::IsKeyPressed(TD_KEY_TAB))
 		{
 			TD_TRACE("Tab key is press (poll) !");
@@ -142,6 +146,20 @@ public:
 		if (Tide::Input::IsKeyPressed(TD_KEY_D))
 			m_CameraRotation -= m_CameraRotationSpeed * ts;
 
+		// --- u_Transform ---
+		if (Tide::Input::IsKeyPressed(TD_KEY_I)) {
+			m_SquarePosition.y += m_SquareMoveSpeed;
+		}
+		else if (Tide::Input::IsKeyPressed(TD_KEY_K)) {
+			m_SquarePosition.y -= m_SquareMoveSpeed;
+		}
+		if (Tide::Input::IsKeyPressed(TD_KEY_J)) {
+			m_SquarePosition.x -= m_SquareMoveSpeed;
+		}
+		else if (Tide::Input::IsKeyPressed(TD_KEY_L)) {
+			m_SquarePosition.x += m_SquareMoveSpeed;
+		}
+
 		Tide::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		Tide::RenderCommand::Clear();
 
@@ -149,7 +167,23 @@ public:
 		m_Camera.SetRotation(m_CameraRotation);
 
 		Tide::Renderer::BeginScene(m_Camera);
-		Tide::Renderer::Submit(m_BlueShader, m_SquareVA);
+
+		// --- Square ---
+		glm::mat4 sqtransform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
+		Tide::Renderer::Submit(m_BlueShader, m_SquareVA, sqtransform);
+
+		// --- Array of Square ---
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		for (int i=0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				glm::vec3 pos(i * 0.11f, j * 0.11f, 0.0f);
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+				Tide::Renderer::Submit(m_BlueShader, m_SquareVA, transform);
+			}
+		}
+
 		Tide::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Tide::Renderer::EndScene();
@@ -176,9 +210,12 @@ private:
 	Tide::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
 	float m_CameraMoveSpeed = 5.0;
-
 	float m_CameraRotation = 0.0f;
 	float m_CameraRotationSpeed = 24.0f;
+
+	// ...rectangle...
+	glm::vec3 m_SquarePosition = { -1.0f, -1.0f, -1.0f };
+	float m_SquareMoveSpeed = 0.05f;
 };
 
 class TideSandBox : public Tide::TideApp
