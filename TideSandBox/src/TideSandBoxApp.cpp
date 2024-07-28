@@ -1,6 +1,8 @@
 #include <Tide.h>
 #include "imgui/imgui.h"
+#include "Platform/OpenGL/OpenGLShader.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer : public Tide::Layer
 {
@@ -86,9 +88,9 @@ public:
 			}
 		)";
 
-		m_Shader.reset(new Tide::Shader(vertexSrc, fragmentSrc));
+		m_Shader.reset(Tide::Shader::Create(vertexSrc, fragmentSrc));
 
-		std::string blueShaderVertexSrc = R"(
+		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
@@ -105,22 +107,22 @@ public:
 			}
 		)";
 
-		std::string blueShaderFragmentSrc = R"(
+		std::string flatColorShaderFragmentSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
 
 			in vec3 v_Position;
-
-			uniform vec4 u_Color;
+			
+			uniform vec3 u_Color;
 
 			void main()
 			{
-				color = u_Color;
+				color = vec4(u_Color, 1.0);
 			}
 		)";
 
-		m_BlueShader.reset(new Tide::Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
+		m_FlatColorShader.reset(Tide::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 	}
 
 	void OnUpdate(Tide::Timestep ts) override
@@ -170,31 +172,19 @@ public:
 
 		Tide::Renderer::BeginScene(m_Camera);
 
-		// --- Square Color ---
-		glm::vec4 redColor(0.8f, 0.2f, 0.3f, 1.0f);
-		glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
-
-		// --- Square ---
-		glm::mat4 sqtransform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
-		Tide::Renderer::Submit(m_BlueShader, m_SquareVA, sqtransform);
-
 		// --- Array of Square ---
 		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
+		std::dynamic_pointer_cast<Tide::OpenGLShader>(m_FlatColorShader)->Bind();
+		std::dynamic_pointer_cast<Tide::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
+
 		for (int i=0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
 			{
-				if ( j%2 == 0)
-				{
-					m_BlueShader->UploadUniformFloat4("u_Color", redColor);
-				}
-				else
-				{
-					m_BlueShader->UploadUniformFloat4("u_Color", blueColor);
-				}
 				glm::vec3 pos(i * 0.11f, j * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-				Tide::Renderer::Submit(m_BlueShader, m_SquareVA, transform);
+				Tide::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
 
@@ -205,8 +195,8 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
-		ImGui::Begin("Test");
-		ImGui::Text("Hello World!");
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
 		ImGui::End();
 	}
 
@@ -218,7 +208,7 @@ private:
 	std::shared_ptr<Tide::Shader> m_Shader;
 	std::shared_ptr<Tide::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Tide::Shader> m_BlueShader;
+	std::shared_ptr<Tide::Shader> m_FlatColorShader;
 	std::shared_ptr<Tide::VertexArray> m_SquareVA;
 
 	Tide::OrthographicCamera m_Camera;
@@ -230,6 +220,8 @@ private:
 	// ...rectangle...
 	glm::vec3 m_SquarePosition = { -1.0f, -1.0f, -1.0f };
 	float m_SquareMoveSpeed = 0.05f;
+
+	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };
 
 class TideSandBox : public Tide::TideApp
