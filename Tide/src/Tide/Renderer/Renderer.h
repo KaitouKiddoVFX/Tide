@@ -9,6 +9,7 @@ namespace Tide
 	class Renderer
 	{
 	public:
+		static void Init();
 		static void BeginScene(OrthographicCamera& camera);
 		static void EndScene();
 		static void Submit(const Tide::Ref<Shader>& shader, const Tide::Ref<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
