@@ -10,6 +10,7 @@ public:
 	ExampleLayer()
 		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
 	{
+		// m_Shader -> triangle
 		m_VertexArray.reset(Tide::VertexArray::Create());
 
 		float vertices[3 * 7] = {
@@ -32,6 +33,7 @@ public:
 		indexBuffer.reset(Tide::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
+		// m_Shader -> rectangle
 		m_SquareVA.reset(Tide::VertexArray::Create());
 
 		float squareVertices[5 * 4] = {
@@ -54,6 +56,7 @@ public:
 		squareIB.reset(Tide::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
+		// m_Shader_Source
 		std::string vertexSrc = R"(
 			#version 330 core
 			
@@ -91,6 +94,7 @@ public:
 
 		m_Shader.reset(Tide::Shader::Create(vertexSrc, fragmentSrc));
 
+		// m_FlatColorShader_Source
 		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
 			
@@ -125,43 +129,14 @@ public:
 
 		m_FlatColorShader.reset(Tide::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 
-		std::string textureShaderVertexSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec2 a_TexCoord;
+		// m_TextureShader
+		m_TextureShader.reset(Tide::Shader::Create("assets/shaders/Texture.glsl"));
 
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_Transform;
-			
-			out vec2 v_TexCoord;
-
-			void main()
-			{
-				v_TexCoord = a_TexCoord;
-				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
-			}
-		)";
-
-		std::string textureShaderFragmentSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-			
-			in vec2 v_TexCoord;
-
-			uniform sampler2D u_Texture;
-
-			void main()
-			{
-				color = texture(u_Texture, v_TexCoord);
-			}
-		)";
-
-		m_TextureShader.reset(Tide::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+		// m_Texture2D_object
 		m_Texture = Tide::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_LogoTexture = Tide::Texture2D::Create("assets/textures/ChernoLogo.png");
 
+		// type cast
 		std::dynamic_pointer_cast<Tide::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<Tide::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
@@ -219,7 +194,7 @@ public:
 		std::dynamic_pointer_cast<Tide::OpenGLShader>(m_FlatColorShader)->Bind();
 		std::dynamic_pointer_cast<Tide::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
 
-		for (int i=0; i < 10; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			for (int j = 0; j < 10; j++)
 			{
@@ -275,7 +250,7 @@ private:
 class TideSandBox : public Tide::TideApp
 {
 public:
-	TideSandBox() 
+	TideSandBox()
 	{
 		PushLayer(new ExampleLayer());
 	};
