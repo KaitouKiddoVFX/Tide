@@ -21,6 +21,3 @@
 #include "Tide/Renderer/Texture.h"
 #include "Tide/Renderer/VertexArray.h"
 #include "Tide/Renderer/OrthographicCamera.h"
-
-// --- Entry Point ---
-#include "Tide/Core/EntryPt.h"

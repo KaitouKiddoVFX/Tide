@@ -4,6 +4,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "TideSandBox2D.h"
+// Temp Include
+#include "Tide/Core/EntryPt.h"
+
 class ExampleLayer : public Tide::Layer
 {
 public:
@@ -11,7 +15,7 @@ public:
 		: Layer("Example"), m_CameraController(1280.0f / 720.0f)
 	{
 		// m_Shader -> triangle
-		m_VertexArray.reset(Tide::VertexArray::Create());
+		m_VertexArray = Tide::VertexArray::Create();
 
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -34,7 +38,7 @@ public:
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		// m_Shader -> rectangle
-		m_SquareVA.reset(Tide::VertexArray::Create());
+		m_SquareVA = Tide::VertexArray::Create();
 
 		float squareVertices[5 * 4] = {
 			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
@@ -211,7 +215,8 @@ class TideSandBox : public Tide::TideApp
 public:
 	TideSandBox()
 	{
-		PushLayer(new ExampleLayer());
+		// PushLayer(new ExampleLayer());
+		PushLayer(new TideSandBox2D());
 	};
 	~TideSandBox() {};
 };

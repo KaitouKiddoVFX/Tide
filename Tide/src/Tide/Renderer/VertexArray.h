@@ -15,6 +15,6 @@ namespace Tide
 		virtual void SetIndexBuffer(const Tide::Ref<IndexBuffer>& IndexBuffer) = 0;
 		virtual const std::vector<Tide::Ref<VertexBuffer>>& GetVertexBuffers() const = 0;
 		virtual const Tide::Ref<IndexBuffer>& GetIndexBuffer() const = 0;
-		static VertexArray* Create();
+		static Ref<VertexArray> Create();
 	};
 }
