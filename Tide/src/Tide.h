@@ -9,6 +9,7 @@
 #include "Tide/Input.h"
 #include "Tide/KeyCodes.h"
 #include "Tide/MouseButtonCodes.h"
+#include "Tide/OrthographicCameraController.h"
 
 #include "Tide/ImGui/ImGuiLayer.h"
 
