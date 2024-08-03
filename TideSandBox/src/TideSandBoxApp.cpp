@@ -92,7 +92,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Tide::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = Tide::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
 
 		// m_FlatColorShader_Source
 		std::string flatColorShaderVertexSrc = R"(
@@ -127,18 +127,18 @@ public:
 			}
 		)";
 
-		m_FlatColorShader.reset(Tide::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+		m_FlatColorShader = Tide::Shader::Create("FlatColor", flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
 
 		// m_TextureShader
-		m_TextureShader.reset(Tide::Shader::Create("assets/shaders/Texture.glsl"));
+		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
 		// m_Texture2D_object
 		m_Texture = Tide::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_LogoTexture = Tide::Texture2D::Create("assets/textures/ChernoLogo.png");
 
 		// type cast
-		std::dynamic_pointer_cast<Tide::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Tide::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Tide::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<Tide::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Tide::Timestep ts) override
@@ -204,10 +204,12 @@ public:
 			}
 		}
 
+		auto textureShader = m_ShaderLibrary.Get("Texture");
+
 		m_Texture->Bind();
-		Tide::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Tide::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		m_LogoTexture->Bind();
-		Tide::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Tide::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		// Triangle
 		// Tide::Renderer::Submit(m_Shader, m_VertexArray);
@@ -227,10 +229,11 @@ public:
 	}
 
 private:
+	Tide::ShaderLibrary m_ShaderLibrary;
 	Tide::Ref<Tide::Shader> m_Shader;
 	Tide::Ref<Tide::VertexArray> m_VertexArray;
 
-	Tide::Ref<Tide::Shader> m_FlatColorShader, m_TextureShader;
+	Tide::Ref<Tide::Shader> m_FlatColorShader;
 	Tide::Ref<Tide::VertexArray> m_SquareVA;
 	Tide::Ref<Tide::Texture2D> m_Texture, m_LogoTexture;
 
