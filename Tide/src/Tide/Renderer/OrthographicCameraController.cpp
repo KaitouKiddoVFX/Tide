@@ -1,7 +1,7 @@
 #include "tdpch.h"
 #include "OrthographicCameraController.h"
-#include "Tide/Input.h"
-#include "Tide/KeyCodes.h"
+#include "Tide/Core/Input.h"
+#include "Tide/Core/KeyCodes.h"
 
 namespace Tide
 {

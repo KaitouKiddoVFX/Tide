@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Tide/Core.h"
+#include "Tide/Core/Core.h"
 #include "Layer.h"
 
 namespace Tide

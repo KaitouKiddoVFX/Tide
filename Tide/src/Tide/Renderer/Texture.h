@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "Tide/Core.h"
+#include "Tide/Core/Core.h"
 
 namespace Tide
 {

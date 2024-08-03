@@ -5,7 +5,7 @@
 #include "backends/imgui_impl_opengl3.h"
 #include "backends/imgui_impl_glfw.h"
 
-#include "Tide/TideApp.h"
+#include "Tide/Core/TideApp.h"
 
 // TEMPORARY
 #include <GLFW/glfw3.h>

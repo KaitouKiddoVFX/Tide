@@ -1,6 +1,6 @@
 #include "tdpch.h"
 #include "WindowsInput.h"
-#include "Tide/TideApp.h"
+#include "Tide/Core/TideApp.h"
 #include <GLFW/glfw3.h>
 
 namespace Tide

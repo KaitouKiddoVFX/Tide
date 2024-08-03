@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Tide/Window.h"
+#include "Tide/Core/Window.h"
 #include "Tide/Renderer/GraphicsContext.h"
 #include <GLFW/glfw3.h>
 

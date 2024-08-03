@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Tide/Log.h"
+#include "Tide/Core/Log.h"
 
 #ifdef TD_PLATFORM_WINDOWS
 	#include <Windows.h>

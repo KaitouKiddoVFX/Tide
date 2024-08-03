@@ -1,7 +1,7 @@
 #include "tdpch.h"
 #include "Input.h"
 #include "TideApp.h"
-#include "Tide/Log.h"
+#include "Tide/Core/Log.h"
 #include "Tide/Renderer/Renderer.h"
 
 #include <glfw/glfw3.h>

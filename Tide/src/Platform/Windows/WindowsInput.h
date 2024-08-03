@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Tide/Input.h"
+#include "Tide/Core/Input.h"
 
 namespace Tide
 {

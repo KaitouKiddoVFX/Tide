@@ -1,7 +1,7 @@
 #pragma once
 #include "Core.h"
 #include "Window.h"
-#include "Tide/LayerStack.h"
+#include "Tide/Core/LayerStack.h"
 #include "Tide/Events/Event.h"
 #include "Tide/Events/AppEvent.h"
 #include "Tide/Core/Timestep.h"

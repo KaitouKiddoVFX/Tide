@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Tide/Layer.h"
+#include "Tide/Core/Layer.h"
 
 #include "Tide/Events/AppEvent.h"
 #include "Tide/Events/KeyEvent.h"

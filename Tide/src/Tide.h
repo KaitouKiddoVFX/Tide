@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Tide/TideApp.h"
-#include "Tide/Layer.h"
-#include "Tide/Log.h"
+#include "Tide/Core/TideApp.h"
+#include "Tide/Core/Layer.h"
+#include "Tide/Core/Log.h"
 
 #include "Tide/Core/Timestep.h"
 
-#include "Tide/Input.h"
-#include "Tide/KeyCodes.h"
-#include "Tide/MouseButtonCodes.h"
-#include "Tide/OrthographicCameraController.h"
+#include "Tide/Core/Input.h"
+#include "Tide/Core/KeyCodes.h"
+#include "Tide/Core/MouseButtonCodes.h"
+#include "Tide/Renderer/OrthographicCameraController.h"
 
 #include "Tide/ImGui/ImGuiLayer.h"
 
@@ -23,4 +23,4 @@
 #include "Tide/Renderer/OrthographicCamera.h"
 
 // --- Entry Point ---
-#include "Tide/EntryPt.h"
+#include "Tide/Core/EntryPt.h"
