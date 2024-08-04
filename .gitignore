@@ -12,8 +12,4 @@ bin-int/
 
 # submodule
 Tide/vendor/
-
 TideSandBox/imgui.ini
-
-# document
-*.docx

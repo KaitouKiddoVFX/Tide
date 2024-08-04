@@ -2,7 +2,6 @@
 #include "imgui/imgui.h"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <Platform/OpenGL/OpenGLShader.h>
 
 TideSandBox2D::TideSandBox2D()
 	: Layer("TideSandBox2D"), m_CameraController(1280.0f / 720.0f)
@@ -11,6 +10,7 @@ TideSandBox2D::TideSandBox2D()
 
 void TideSandBox2D::OnAttach()
 {
+	m_CheckerboardTexture = Tide::Texture2D::Create("assets/textures/Checkerboard.png");
 }
 
 void TideSandBox2D::OnDetach()
@@ -27,6 +27,9 @@ void TideSandBox2D::OnUpdate(Tide::Timestep ts)
 	Tide::RenderCommand::Clear();
 	Tide::Renderer2D::BeginScene(m_CameraController.GetCamera());
 	Tide::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+	Tide::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+	Tide::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
+	Tide::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 10.0f, 10.0f }, m_CheckerboardTexture);
 	Tide::Renderer2D::EndScene();
 }
 
