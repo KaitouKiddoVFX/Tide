@@ -15,6 +15,7 @@
 
 // --- Render ---
 #include "Tide/Renderer/Renderer.h"
+#include "Tide/Renderer/Renderer2D.h"
 #include "Tide/Renderer/RenderCommand.h"
 #include "Tide/Renderer/Buffer.h"
 #include "Tide/Renderer/Shader.h"

@@ -24,7 +24,7 @@ public:
 		};
 
 		Tide::Ref<Tide::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(Tide::VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertexBuffer = Tide::VertexBuffer::Create(vertices, sizeof(vertices));
 		Tide::BufferLayout layout = {
 			{ Tide::ShaderDataType::Float3, "a_Position" },
 			{ Tide::ShaderDataType::Float4, "a_Color" }
@@ -34,7 +34,7 @@ public:
 
 		uint32_t indices[3] = { 0, 1, 2 };
 		Tide::Ref<Tide::IndexBuffer> indexBuffer;
-		indexBuffer.reset(Tide::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		indexBuffer = Tide::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		// m_Shader -> rectangle
@@ -48,7 +48,7 @@ public:
 		};
 
 		Tide::Ref<Tide::VertexBuffer> squareVB;
-		squareVB.reset(Tide::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		squareVB = Tide::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 		squareVB->SetLayout({
 			{ Tide::ShaderDataType::Float3, "a_Position" },
 			{ Tide::ShaderDataType::Float2, "a_TexCoord" }
@@ -57,7 +57,7 @@ public:
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
 		Tide::Ref<Tide::IndexBuffer> squareIB;
-		squareIB.reset(Tide::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		squareIB = Tide::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
 		// m_Shader_Source
