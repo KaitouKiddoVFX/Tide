@@ -13,3 +13,6 @@ bin-int/
 # submodule
 Tide/vendor/
 TideSandBox/imgui.ini
+
+# profile
+TideSandBox/**.json

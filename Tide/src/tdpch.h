@@ -14,6 +14,7 @@
 #include <unordered_set>
 
 #include "Tide/Core/Log.h"
+#include "Tide/Debug/Instrumentor.h"
 
 #ifdef TD_PLATFORM_WINDOWS
 	#include <Windows.h>
