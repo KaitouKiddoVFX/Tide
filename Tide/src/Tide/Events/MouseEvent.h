@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Event.h"
+#include "Tide/Events/Event.h"
 
 namespace Tide
 {
-	class TIDE_API MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(float x, float y)
@@ -27,7 +27,7 @@ namespace Tide
 		float m_MouseX, m_MouseY;
 	};
 
-	class TIDE_API MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(float xOffset, float yOffset)
@@ -49,7 +49,7 @@ namespace Tide
 		float m_XOffset, m_YOffset;
 	};
 
-	class TIDE_API MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	public:
 		inline int GetMouseButton() const { return m_Button; }
@@ -60,7 +60,7 @@ namespace Tide
 		int m_Button;
 	};
 
-	class TIDE_API MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(int button)
@@ -76,7 +76,7 @@ namespace Tide
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class TIDE_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(int button)

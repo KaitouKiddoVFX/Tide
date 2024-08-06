@@ -1,7 +1,7 @@
 #pragma once
 
-#include "OrthographicCamera.h"
-#include "Texture.h"
+#include "Tide/Renderer/OrthographicCamera.h"
+#include "Tide/Renderer/Texture.h"
 
 namespace Tide
 {

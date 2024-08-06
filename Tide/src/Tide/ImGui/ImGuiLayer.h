@@ -1,14 +1,13 @@
 #pragma once
 
 #include "Tide/Core/Layer.h"
-
 #include "Tide/Events/AppEvent.h"
 #include "Tide/Events/KeyEvent.h"
 #include "Tide/Events/MouseEvent.h"
 
 namespace Tide {
 
-	class TIDE_API ImGuiLayer : public Layer
+	class ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();

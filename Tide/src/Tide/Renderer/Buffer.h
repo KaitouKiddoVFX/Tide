@@ -35,7 +35,7 @@ namespace Tide
 		uint32_t Size;
 		uint32_t Offset;
 		bool Normalized;
-		BufferElement() {}
+		BufferElement() = default;
 		BufferElement(ShaderDataType type, const std::string& name, bool normalized = false)
 			: Name(name), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized)
 		{
@@ -62,13 +62,12 @@ namespace Tide
 			TD_CORE_ASSERT(false, "Unknown ShaderDataType!");
 			return 0;
 		}
-
 	};
 
 	class BufferLayout
 	{
 	public:
-		BufferLayout() {};
+		BufferLayout() = default;
 		BufferLayout(const std::initializer_list<BufferElement>& elements)
 			: m_Elements(elements)
 		{
@@ -104,7 +103,7 @@ namespace Tide
 	class VertexBuffer
 	{
 	public:
-		virtual ~VertexBuffer() {};
+		virtual ~VertexBuffer() = default;
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 		virtual const BufferLayout& GetLayout() const = 0;
@@ -115,7 +114,7 @@ namespace Tide
 	class IndexBuffer
 	{
 	public:
-		virtual ~IndexBuffer() {};
+		virtual ~IndexBuffer() = default;
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 		virtual uint32_t GetCount() const = 0;

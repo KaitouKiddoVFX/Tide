@@ -13,21 +13,6 @@
 	#endif
 #endif
 
-// DLL Support
-#ifdef TD_PLATFORM_WINDOWS
-	#if TD_DYNAMIC_LINK
-		#ifdef TD_BUILD_DLL
-			#define TIDE_API __declspec(dllexport)
-		#else TD_BUILD_DLL
-			#define TIDE_API __declspec(dllimport)
-		#endif
-	#else
-		#define TIDE_API
-	#endif
-#else
-	#error TD Only support windows!
-#endif
-
 #ifdef TD_DEBUG
 	#define TD_ENABLE_ASSERTS
 #endif
@@ -49,7 +34,7 @@ namespace Tide
 	template<typename T>
 	using Scope = std::unique_ptr<T>;
 	template<typename T, typename ... Args>
-	constexpr Scope<T> Create(Args&& ... args)
+	constexpr Scope<T> CreateScope(Args&& ... args)
 	{
 		return std::make_unique<T>(std::forward<Args>(args)...);
 	}

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "RendererAPI.h"
+#include "Tide/Renderer/RendererAPI.h"
 
 namespace Tide
 {
@@ -33,6 +33,6 @@ namespace Tide
 		}
 
 	private:
-		static RendererAPI* s_RendererAPI;
+		static Scope<RendererAPI> s_RendererAPI;
 	};
 }

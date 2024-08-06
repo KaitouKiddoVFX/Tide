@@ -1,17 +1,17 @@
 #include "tdpch.h"
 #include "ImGuiLayer.h"
-
-#include "imgui.h"
-#include "backends/imgui_impl_opengl3.h"
-#include "backends/imgui_impl_glfw.h"
-
 #include "Tide/Core/TideApp.h"
+
+#include <imgui.h>
+#include <backends/imgui_impl_opengl3.h>
+#include <backends/imgui_impl_glfw.h>
 
 // TEMPORARY
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
-namespace Tide {
+namespace Tide 
+{
 	ImGuiLayer::ImGuiLayer()
 		: Layer("ImGuiLayer")
 	{
@@ -19,6 +19,8 @@ namespace Tide {
 
 	void ImGuiLayer::OnAttach()
 	{
+		TD_PROFILE_FUNCTION();
+
 		// Setup Dear ImGui Context
 		IMGUI_CHECKVERSION();		
 		ImGui::CreateContext();
@@ -52,6 +54,7 @@ namespace Tide {
 
 	void ImGuiLayer::OnDetach()
 	{
+		TD_PROFILE_FUNCTION();
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
@@ -59,6 +62,7 @@ namespace Tide {
 
 	void ImGuiLayer::Begin()
 	{
+		TD_PROFILE_FUNCTION();
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -66,6 +70,7 @@ namespace Tide {
 
 	void ImGuiLayer::End()
 	{
+		TD_PROFILE_FUNCTION();
 		ImGuiIO& io = ImGui::GetIO();
 		TideApp& app = TideApp::Get();
 		io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());

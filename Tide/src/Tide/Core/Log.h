@@ -1,12 +1,11 @@
 #pragma once
-#include <memory>
-#include "Core.h"
-#include "spdlog/spdlog.h"
-#include "spdlog/fmt/ostr.h"
+#include "Tide/Core/Core.h"
+#include <spdlog/spdlog.h>
+#include <spdlog/fmt/ostr.h>
 
 namespace Tide
 {
-	class TIDE_API Log
+	class Log
 	{
 	public:
 		static void Init();
@@ -24,11 +23,11 @@ namespace Tide
 #define TD_CORE_INFO(...)	::Tide::Log::GetCoreLogger()->info(__VA_ARGS__)
 #define TD_CORE_WARN(...)	::Tide::Log::GetCoreLogger()->warn(__VA_ARGS__)
 #define TD_CORE_ERROR(...)	::Tide::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define TD_CORE_FATAL(...)	::Tide::Log::GetCoreLogger()->fatal(__VA_ARGS__)
+#define TD_CORE_CRITICAL(...)	::Tide::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
 // Client Log Marcos
 #define TD_TRACE(...)		::Tide::Log::GetClientLogger()->trace(__VA_ARGS__)
 #define TD_INFO(...)		::Tide::Log::GetClientLogger()->info(__VA_ARGS__)
 #define TD_WARN(...)		::Tide::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define TD_ERROR(...)		::Tide::Log::GetClientLogger()->error(__VA_ARGS__)
-#define TD_FATAL(...)		::Tide::Log::GetClientLogger()->fatal(__VA_ARGS__)
+#define TD_CRITICAL(...)		::Tide::Log::GetClientLogger()->critical(__VA_ARGS__)

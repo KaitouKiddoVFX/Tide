@@ -1,6 +1,6 @@
 #pragma once
-#include "Core.h"
-#include "Window.h"
+#include "Tide/Core/Core.h"
+#include "Tide/Core/Window.h"
 #include "Tide/Core/LayerStack.h"
 #include "Tide/Events/Event.h"
 #include "Tide/Events/AppEvent.h"
@@ -9,11 +9,11 @@
 
 namespace Tide
 {
-	class TIDE_API TideApp
+	class TideApp
 	{
 	public:
 		TideApp();
-		virtual ~TideApp() = default;
+		virtual ~TideApp();
 		void Run();
 		void OnEvent(Event& e);
 		void PushLayer(Layer* layer);

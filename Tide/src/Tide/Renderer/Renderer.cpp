@@ -1,7 +1,6 @@
 #include "tdpch.h"
-#include "Renderer.h"
-#include "Renderer2D.h"
-#include "Platform/OpenGL/OpenGLShader.h"
+#include "Tide/Renderer/Renderer.h"
+#include "Tide/Renderer/Renderer2D.h"
 
 namespace Tide
 {
@@ -9,8 +8,14 @@ namespace Tide
 
 	void Renderer::Init()
 	{
+		TD_PROFILE_FUNCTION();
 		RenderCommand::Init();
 		Renderer2D::Init();
+	}
+
+	void Renderer::Shutdown()
+	{
+		Renderer2D::Shutdown();
 	}
 
 	void Renderer::OnWindowResize(uint32_t width, uint32_t height)
@@ -30,8 +35,8 @@ namespace Tide
 	void Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
 	{
 		shader->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
+		shader->SetMat4("u_ViewProjection", m_SceneData->ViewProjectionMatrix);
+		shader->SetMat4("u_Transform", transform);
 		
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);

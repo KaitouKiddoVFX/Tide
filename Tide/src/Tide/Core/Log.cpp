@@ -1,4 +1,5 @@
 #include "tdpch.h"
+#include "Tide/Core/Log.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 
 namespace Tide
@@ -16,4 +17,3 @@ namespace Tide
 		s_ClientLogger->set_level(spdlog::level::trace);
 	}
 }
-

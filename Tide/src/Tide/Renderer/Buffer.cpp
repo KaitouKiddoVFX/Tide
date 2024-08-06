@@ -1,6 +1,6 @@
 #include "tdpch.h"
-#include "Buffer.h"
-#include "Renderer.h"
+#include "Tide/Renderer/Buffer.h"
+#include "Tide/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLBuffer.h"
 
 namespace Tide

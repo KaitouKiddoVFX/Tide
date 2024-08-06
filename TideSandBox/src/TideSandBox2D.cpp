@@ -10,11 +10,13 @@ TideSandBox2D::TideSandBox2D()
 
 void TideSandBox2D::OnAttach()
 {
+	TD_PROFILE_FUNCTION();
 	m_CheckerboardTexture = Tide::Texture2D::Create("assets/textures/Checkerboard.png");
 }
 
 void TideSandBox2D::OnDetach()
 {
+	TD_PROFILE_FUNCTION();
 }
 
 void TideSandBox2D::OnUpdate(Tide::Timestep ts)
