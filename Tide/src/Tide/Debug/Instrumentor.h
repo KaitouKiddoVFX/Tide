@@ -123,15 +123,15 @@ namespace Tide
 	};
 }
 
-#define TD_PROFILE 1
+#define TD_PROFILE 0
 #if TD_PROFILE
 	#define TD_PROFILE_BEGIN_SESSION(name, filepath) ::Tide::Instrumentor::Get().BeginSession(name, filepath);
 	#define TD_PROFILE_END_SESSION() ::Tide::Instrumentor::Get().EndSession();
 	#define TD_PROFILE_SCOPE(name) ::Tide::InstrumentationTimer timer##__LINE__(name);
 	#define TD_PROFILE_FUNCTION() TD_PROFILE_SCOPE(__FUNCSIG__)
 #else
-	#define HZ_PROFILE_BEGIN_SESSION(name, filepath)
-	#define HZ_PROFILE_END_SESSION()
-	#define HZ_PROFILE_SCOPE(name)
-	#define HZ_PROFILE_FUNCTION()
+	#define TD_PROFILE_BEGIN_SESSION(name, filepath)
+	#define TD_PROFILE_END_SESSION()
+	#define TD_PROFILE_SCOPE(name)
+	#define TD_PROFILE_FUNCTION()
 #endif

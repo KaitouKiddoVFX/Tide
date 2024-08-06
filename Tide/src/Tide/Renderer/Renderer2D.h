@@ -11,6 +11,7 @@ namespace Tide
 		static void Init();
 		static void Shutdown();
 		static void BeginScene(const OrthographicCamera& camera);
+		static void Flush();
 		static void EndScene();
 
 		// Primitives
