@@ -4,7 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 TideSandBox2D::TideSandBox2D()
-	: Layer("TideSandBox2D"), m_CameraController(1280.0f / 720.0f)
+	: Layer("TideSandBox2D"), m_CameraController(1280.0f / 720.0f, true)
 {
 }
 
@@ -12,6 +12,7 @@ void TideSandBox2D::OnAttach()
 {
 	TD_PROFILE_FUNCTION();
 	m_CheckerboardTexture = Tide::Texture2D::Create("assets/textures/Checkerboard.png");
+	m_TextureAltas = Tide::Texture2D::Create("assets/games/textures/RPGpack_sheet_2X.png");
 
 	// Init Particle here
 	m_Particle.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
@@ -46,6 +47,7 @@ void TideSandBox2D::OnUpdate(Tide::Timestep ts)
 		Tide::RenderCommand::Clear();
 	}
 
+#if 0
 	{
 		static float rotation = 0.0f;
 		rotation += ts * 50.0f;
@@ -70,6 +72,7 @@ void TideSandBox2D::OnUpdate(Tide::Timestep ts)
 		}
 		Tide::Renderer2D::EndScene();
 	}
+#endif
 
 	// the position of cursor convert into worldspace
 	if (Tide::Input::IsMouseButtonPressed(TD_MOUSE_BUTTON_LEFT))
@@ -89,6 +92,10 @@ void TideSandBox2D::OnUpdate(Tide::Timestep ts)
 	}
 	m_ParticleSystem.OnUpdate(ts);
 	m_ParticleSystem.OnRender(m_CameraController.GetCamera());
+
+	Tide::Renderer2D::BeginScene(m_CameraController.GetCamera());
+	Tide::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.4f }, { 1.0f, 1.0f }, m_TextureAltas, 1.0f);
+	Tide::Renderer2D::EndScene();
 }
 
 void TideSandBox2D::OnImGuiRender()
