@@ -7,6 +7,15 @@
 
 namespace Tide
 {
+	struct OrthographicCameraBounds
+	{
+		float Left, Right;
+		float Bottom, Top;
+
+		float GetWidth() { return Right - Left; }
+		float GetHeight() { return Top - Bottom; }
+	};
+
 	class OrthographicCameraController
 	{
 	public:
@@ -17,6 +26,7 @@ namespace Tide
 
 		OrthographicCamera& GetCamera() { return m_Camera; }
 		const OrthographicCamera& GetCamera() const { return m_Camera; }
+		const OrthographicCameraBounds& GetBounds() const { return m_Bounds; }
 
 		float GetZoomLevel() const { return m_ZoomLevel; }
 		void SetZoomLevel(float level) { m_ZoomLevel = level; }
@@ -28,6 +38,7 @@ namespace Tide
 	private:
 		float m_AspectRatio;
 		float m_ZoomLevel = 1.0f;
+		OrthographicCameraBounds m_Bounds; // Sort is verty important
 		OrthographicCamera m_Camera;
 		bool m_Rotation;
 		glm::vec3 m_CameraPosition = { 0.0f, 0.0f, 0.0f };
