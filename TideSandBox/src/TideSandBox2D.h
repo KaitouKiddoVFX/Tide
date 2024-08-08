@@ -23,7 +23,8 @@ private:
 	Tide::Ref<Tide::VertexArray> m_SquareVA;
 	Tide::Ref<Tide::Shader> m_FlatColorShader;
 	Tide::Ref<Tide::Texture2D> m_CheckerboardTexture;
-	Tide::Ref<Tide::Texture2D> m_TextureAltas;
+	Tide::Ref<Tide::Texture2D> m_SpriteSheet;
+	Tide::Ref<Tide::SubTexture2D> m_TextureStair, m_TextureTree, m_TextureBush;
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 	ParticleProps m_Particle;

@@ -12,7 +12,10 @@ void TideSandBox2D::OnAttach()
 {
 	TD_PROFILE_FUNCTION();
 	m_CheckerboardTexture = Tide::Texture2D::Create("assets/textures/Checkerboard.png");
-	m_TextureAltas = Tide::Texture2D::Create("assets/games/textures/RPGpack_sheet_2X.png");
+	m_SpriteSheet = Tide::Texture2D::Create("assets/games/textures/RPGpack_sheet_2X.png");
+	m_TextureStair = Tide::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 7, 6 }, { 128, 128 });
+	m_TextureBush = Tide::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 2, 3 }, { 128, 128 });
+	m_TextureTree = Tide::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 4, 1 }, { 128, 128 }, { 1,2 });
 
 	// Init Particle here
 	m_Particle.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
@@ -94,7 +97,9 @@ void TideSandBox2D::OnUpdate(Tide::Timestep ts)
 	m_ParticleSystem.OnRender(m_CameraController.GetCamera());
 
 	Tide::Renderer2D::BeginScene(m_CameraController.GetCamera());
-	Tide::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.4f }, { 1.0f, 1.0f }, m_TextureAltas, 1.0f);
+	Tide::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.9f }, { 1.0f, 1.0f }, m_TextureBush, 1.0f);
+	Tide::Renderer2D::DrawQuad({ 1.0f, 0.0f, 0.9f }, { 1.0f, 1.0f }, m_TextureStair, 1.0f);
+	Tide::Renderer2D::DrawQuad({ -1.0f, 0.0f, 0.9f }, { 1.0f, 2.0f }, m_TextureTree, 1.0f);
 	Tide::Renderer2D::EndScene();
 }
 

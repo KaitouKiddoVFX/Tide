@@ -22,6 +22,7 @@
 #include "Tide/Renderer/Buffer.h"
 #include "Tide/Renderer/Shader.h"
 #include "Tide/Renderer/Texture.h"
+#include "Tide/Renderer/SubTexture2D.h"
 #include "Tide/Renderer/VertexArray.h"
 
 #include "Tide/Renderer/OrthographicCamera.h"
